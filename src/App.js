@@ -1,24 +1,52 @@
-import logo from './logo.svg';
+
+import { ToastWrapper } from 'keep-react';
 import './App.css';
+import NavbarComponent from './components/Navbar';
+import { Comercio } from './pages/Comercio';
+import { useState } from 'react';
+import { Login } from './pages/Login';
+import Cookies from 'universal-cookie';
+
+
 
 function App() {
+
+  const cookies = new Cookies();
+  const [usuario, setUsuario] = useState(cookies.get('usuario'));
+
+
+  const handleUsuario = (usuario) => {
+    setUsuario(usuario);
+  }
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className=''>
+      {usuario && <NavbarComponent handleUsuario={handleUsuario} usuario={usuario}/>}
+      {usuario && <Comercio /> }
+
+      {!usuario && <Login handleUsuario={handleUsuario}></Login>}
+
+      
+      <ToastWrapper
+        toastOptions={{
+          classNames: {
+            toast: 'dark:bg-metal-900 border dark:border-metal-800 border-white bg-white',
+            title: 'text-metal-900 dark:text-white',
+            description: 'dark:text-metal-300 text-metal-600',
+            actionButton: 'dark:bg-metal-800 bg-metal-900 text-white',
+            cancelButton: 'dark:bg-metal-800 bg-metal-900 text-white',
+            closeButton: 'dark:bg-metal-800 bg-metal-900 text-white',
+            error: 'text-error-500',
+            success: 'text-success-500',
+            warning: 'text-warning-500',
+            info: 'text-primary-500',
+          },
+        }}
+      />
     </div>
+
   );
 }
 
