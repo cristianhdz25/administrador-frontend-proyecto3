@@ -14,3 +14,8 @@ background: linear-gradient(to right, #2c3e50, #2980b9); /* W3C, IE 10+/ Edge, F
     color: red;
     
 }
+
+.login{
+    width: 22%;
+}
+  

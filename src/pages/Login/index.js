@@ -55,9 +55,9 @@ export const Login = ({handleUsuario}) => {
 
 
     return (
-        <div className='container flex items-center min-h-screen min-w-full'>
-            <div className=' mx-auto w-1/2'>
-                <form className="mx-auto w-96 space-y-5 rounded-lg border p-8 shadow-md" onSubmit={iniciarSesion} noValidate>
+        <div className='container flex items-center min-h-screen min-w-full '>
+        <div className="mx-auto login ">
+            <form className="mx-auto  space-y-5 rounded-lg border p-8 shadow-md" onSubmit={iniciarSesion} noValidate>
                 <h1 className='text-2xl font-semibold text-white'>Iniciar Sesión</h1>
                     <fieldset className="space-y-1">
                         <Label htmlFor="email">Correo</Label>

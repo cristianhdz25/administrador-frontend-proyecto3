@@ -28,7 +28,8 @@ export const Comercio = () => {
   const [comercioSeleccionado, setComercioSeleccionado] = useState({});
   const [date, setDate] = useState(null);
   const [updateCount, setUpdateCount] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [loadingTable, setLoadingTable] = useState(true);
   // const [modalEditar, setModalEditar] = useState(false);
   const [modalRegistrar, setmodalRegistrar] = useState(false);
   const [modalInfo, setModalInfo] = useState(false);
@@ -40,7 +41,7 @@ export const Comercio = () => {
 
 
   useEffect(() => {
-    getComercios({ handleComercios, handleTotalComercios, handleSpinner });
+    getComercios({ handleComercios, handleTotalComercios, handleLoadingTable });
   }, [updateCount]);
 
   const handleComercios = (data) => {
@@ -49,6 +50,10 @@ export const Comercio = () => {
 
   const handleComercioSeleccionado = (comercio) => {
     setComercioSeleccionado(comercio);
+  };
+
+  const handleLoadingTable = (state) => {
+    setLoadingTable(state);
   };
 
   const handleTotalComercios = (total) => {
@@ -142,98 +147,96 @@ export const Comercio = () => {
           filtro={false}
           openModalRegistrar={openModalRegistro}
         >
+          {
+
+            loadingTable &&
+            <TableRow>
+              <TableCell className="text-body-3">
+                <Skeleton className="max-w-xl space-y-2.5">
+                  <SkeletonLine className="h-4 w-full" />
+                </Skeleton>
+              </TableCell>
+              <TableCell className="text-body-3"><Skeleton className="max-w-xl space-y-2.5">
+                <SkeletonLine className="h-4 w-full" />
+              </Skeleton>
+              </TableCell>
+              <TableCell className="text-body-3">
+                <Skeleton className="max-w-xl space-y-2.5">
+                  <SkeletonLine className="h-4 w-full" />
+                </Skeleton>
+              </TableCell>
+              <TableCell className="text-body-3">
+                <Skeleton className="max-w-xl space-y-2.5">
+                  <SkeletonLine className="h-4 w-full" />
+                </Skeleton>
+              </TableCell>
+              <TableCell className="text-body-3">
+                <Skeleton className="max-w-xl space-y-2.5">
+                  <SkeletonLine className="h-4 w-full" />
+                </Skeleton>
+              </TableCell>
+              <TableCell >
+                <Skeleton className="max-w-xl space-y-2.5">
+                  <SkeletonLine className="h-4 w-full" />
+                </Skeleton>
+              </TableCell>
+              <TableCell >
+                <Skeleton className="max-w-xl space-y-2.5">
+                  <SkeletonLine className="h-4 w-full" />
+                </Skeleton>
+              </TableCell>
+              <TableCell >
+                <Skeleton className="max-w-xl space-y-2.5">
+                  <SkeletonLine className="h-4 w-full" />
+                </Skeleton>
+              </TableCell>
+            </TableRow>
+          }
+
           {comercios.map((comercio, index) => (
             <TableRow key={index}>
               <TableCell>
-                {loading ? (
-                  <Skeleton className="max-w-xl space-y-2.5">
-                    <SkeletonLine className="h-4 w-full" />
-                  </Skeleton>
-                ) : (
-                  comercio.cedulaJuridica
-                )}
+                {comercio.cedulaJuridica}
               </TableCell>
               <TableCell>
-                {loading ? (
-                  <Skeleton className="max-w-xl space-y-2.5">
-                    <SkeletonLine className="h-4 w-full" />
-                  </Skeleton>
-                ) : (
-                  comercio.nombre
-                )}
+                {comercio.nombre}
               </TableCell>
               <TableCell>
-                {loading ? (
-                  <Skeleton className="max-w-xl space-y-2.5">
-                    <SkeletonLine className="h-4 w-full" />
-                  </Skeleton>
-                ) : (
-                  comercio.direccion
-                )}
+                {comercio.direccion}
               </TableCell>
               <TableCell>
-                {loading ? (
-                  <Skeleton className="max-w-xl space-y-2.5">
-                    <SkeletonLine className="h-4 w-full" />
-                  </Skeleton>
-                ) : (
-                  formatDateToDisplay(comercio.fechaFundacion)
-                )}
+                {formatDateToDisplay(comercio.fechaFundacion)}
               </TableCell>
               <TableCell>
-                {loading ? (
-                  <Skeleton className="max-w-xl space-y-2.5">
-                    <SkeletonLine className="h-4 w-full" />
-                  </Skeleton>
-                ) : (
-                  comercio.correo
-                )}
+                {comercio.correo}
               </TableCell>
               <TableCell>
-                {loading ? (
-                  <Skeleton className="max-w-xl space-y-2.5">
-                    <SkeletonLine className="h-4 w-full" />
-                  </Skeleton>
-                ) : (
-                  comercio.telefono
-                )}
+                {comercio.telefono}
               </TableCell>
               <TableCell>
-                {loading ? (
-                  <Skeleton className="max-w-xl space-y-2.5">
-                    <SkeletonLine className="h-4 w-full" />
-                  </Skeleton>
-                ) : (
+                <Badge
+                  showIcon
+                  className="text-body-4"
+                  color={comercio.estado ? "success" : "error"}>
+                  {comercio.estado ? "Activo" : "Inactivo"}
+                </Badge>
+              </TableCell>
+              <TableCell>
 
-                  <Badge
-                    showIcon
-                    className="text-body-4"
-                    color={comercio.estado ? "success" : "error"}
-                  >
-                    {comercio.estado ? "Activo" : "Inactivo"}
-                  </Badge>
-                )}
-              </TableCell>
-              <TableCell>
-                {loading ? (
-                  <Skeleton className="max-w-xl space-y-2.5">
-                    <SkeletonLine className="h-4 w-full" />
-                  </Skeleton>
-                ) : (
-                  <div className="flex space-x-4 justify-center">
-                    <Button size="xs" color="primary" onClick={() => verInfoComercio(comercio)}>
-                      <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path>
-                        <path d="M21.894 11.553C19.736 7.236 15.904 5 12 5c-3.903 0-7.736 2.236-9.894 6.553a1 1 0 0 0 0 .894C4.264 16.764 8.096 19 12 19c3.903 0 7.736-2.236 9.894-6.553a1 1 0 0 0 0-.894ZM12 17c-2.969 0-6.002-1.62-7.87-5C5.998 8.62 9.03 7 12 7c2.969 0 6.002 1.62 7.87 5-1.868 3.38-4.901 5-7.87 5Z"></path>
-                      </svg>
-                    </Button>
-                    <Button size="xs" color={comercio.estado ? "error" : "success"} onClick={() => sendFormActualizarEstado(comercio)}>
-                      <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M11 3h2v10h-2V3Zm5.41 3.59 1.42-1.42A8.932 8.932 0 0 1 21 12a9 9 0 0 1-18 0c0-2.74 1.23-5.18 3.17-6.83l1.41 1.41A6.995 6.995 0 0 0 12 19c3.87 0 7-3.13 7-7a6.92 6.92 0 0 0-2.59-5.41Z" clip-rule="evenodd"></path>
-                      </svg>
-                    </Button>
-                  </div>
-                )}
+                <div className="flex space-x-4 justify-center">
+                  <Button size="xs" color="primary" onClick={() => verInfoComercio(comercio)}>
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path>
+                      <path d="M21.894 11.553C19.736 7.236 15.904 5 12 5c-3.903 0-7.736 2.236-9.894 6.553a1 1 0 0 0 0 .894C4.264 16.764 8.096 19 12 19c3.903 0 7.736-2.236 9.894-6.553a1 1 0 0 0 0-.894ZM12 17c-2.969 0-6.002-1.62-7.87-5C5.998 8.62 9.03 7 12 7c2.969 0 6.002 1.62 7.87 5-1.868 3.38-4.901 5-7.87 5Z"></path>
+                    </svg>
+                  </Button>
+                  <Button size="xs" color={comercio.estado ? "error" : "success"} onClick={() => sendFormActualizarEstado(comercio)}>
+                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M11 3h2v10h-2V3Zm5.41 3.59 1.42-1.42A8.932 8.932 0 0 1 21 12a9 9 0 0 1-18 0c0-2.74 1.23-5.18 3.17-6.83l1.41 1.41A6.995 6.995 0 0 0 12 19c3.87 0 7-3.13 7-7a6.92 6.92 0 0 0-2.59-5.41Z" clip-rule="evenodd"></path>
+                    </svg>
+                  </Button>
+                </div>
+
               </TableCell>
             </TableRow>
           ))}
@@ -379,40 +382,40 @@ export const Comercio = () => {
 
         <div className="flex justify-center flex-col mb-6 space-y-6 mt-6">
           <fieldset className="space-y-1 flex text-center flex-col ">
-              <Label htmlFor="cuenta" className="text-body-2 "><p className="text-white">Cédula Jurídica</p></Label>
-              <Label className="text-body-3">{comercioSeleccionado.cedulaJuridica}</Label>
+            <Label htmlFor="cuenta" className="text-body-2 "><p className="text-white">Cédula Jurídica</p></Label>
+            <Label className="text-body-3">{comercioSeleccionado.cedulaJuridica}</Label>
           </fieldset>
 
           <fieldset className="space-y-1 flex text-center flex-col ">
-              <Label htmlFor="nombre" className="text-body-2"><p className="text-white">Nombre</p></Label>
-              <Label className="text-body-3">{comercioSeleccionado.nombre}</Label>
+            <Label htmlFor="nombre" className="text-body-2"><p className="text-white">Nombre</p></Label>
+            <Label className="text-body-3">{comercioSeleccionado.nombre}</Label>
           </fieldset>
 
           <fieldset className="space-y-1 flex text-center flex-col ">
-              <Label htmlFor="direccion" className="text-body-2"><p className="text-white">Dirección</p></Label>
-              <Label className="text-body-3">{comercioSeleccionado.direccion}</Label>
+            <Label htmlFor="direccion" className="text-body-2"><p className="text-white">Dirección</p></Label>
+            <Label className="text-body-3">{comercioSeleccionado.direccion}</Label>
           </fieldset>
 
           <fieldset className="space-y-1 flex text-center flex-col ">
-              <Label htmlFor="fecha" className="text-body-2"><p className="text-white">Fecha de Fundación</p></Label>
-              <Label className="ps-1">{formatDateToDisplay(comercioSeleccionado.fechaFundacion)}</Label>
-         
+            <Label htmlFor="fecha" className="text-body-2"><p className="text-white">Fecha de Fundación</p></Label>
+            <Label className="ps-1">{formatDateToDisplay(comercioSeleccionado.fechaFundacion)}</Label>
+
           </fieldset>
 
           <fieldset className="space-y-1 flex text-center flex-col ">
-              <Label htmlFor="correo" className="text-body-2"><p className="text-white">Correo Electrónico</p></Label>
-              <Label className="ps-1">{comercioSeleccionado.correo}</Label>
-            
+            <Label htmlFor="correo" className="text-body-2"><p className="text-white">Correo Electrónico</p></Label>
+            <Label className="ps-1">{comercioSeleccionado.correo}</Label>
+
           </fieldset>
 
           <fieldset className="space-y-1 flex text-center flex-col ">
-              <Label htmlFor="telefono" className="text-body-2"><p className="text-white">Teléfono</p></Label>
-              <Label className="ps-1">{comercioSeleccionado.telefono}</Label>        
+            <Label htmlFor="telefono" className="text-body-2"><p className="text-white">Teléfono</p></Label>
+            <Label className="ps-1">{comercioSeleccionado.telefono}</Label>
           </fieldset>
 
           <fieldset className="space-y-1 flex text-center flex-col ">
             <Label htmlFor="telefono" className="text-body-2"><p className="text-white">Estado</p></Label>
-              <Label className="ps-1">{comercioSeleccionado.estado ? "Activo" : "Inactivo"}</Label>
+            <Label className="ps-1">{comercioSeleccionado.estado ? "Activo" : "Inactivo"}</Label>
           </fieldset>
         </div>
 

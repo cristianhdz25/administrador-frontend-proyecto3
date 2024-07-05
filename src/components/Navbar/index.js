@@ -26,9 +26,6 @@ export const NavbarComponent = ({ usuario, handleUsuario }) => {
                     <h2 className='text-2xl font-semibold text-white text-center mx-2'> Modulo Administrador</h2>
                 </NavbarBrand>
                 <NavbarList >
-                    {/* <NavbarItem>Projects</NavbarItem>
-                    <NavbarItem>Research</NavbarItem>
-                    <NavbarItem>Contact</NavbarItem> */}
                 </NavbarList>
                 <NavbarList className='mx-2'>
                     <Dropdown placement="bottom-end" >
