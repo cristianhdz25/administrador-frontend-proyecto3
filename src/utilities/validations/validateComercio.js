@@ -55,8 +55,6 @@ export const isValidIBAN = (iban) => {
 
     // Extraer las partes del IBAN
     const codigoPais = iban.slice(0, 2);
-    const digitosControl = iban.slice(2, 4);
-    const numeroCuenta = iban.slice(4);
 
     // Verificar que el código de país sea CR
     if (codigoPais !== 'CR') {

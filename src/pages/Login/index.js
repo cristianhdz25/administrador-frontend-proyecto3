@@ -46,9 +46,6 @@ export const Login = ({handleUsuario}) => {
             handleLoading(false);
             return;
         }
-
-
-
         getUsuarioPorCorreoContrasenna(correo, password, { handleUsuario, handleAlert, handleLoading });
     }
 

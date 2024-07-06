@@ -11,9 +11,10 @@ export const getUsuarioPorCorreoContrasenna = async (correo, contrasenna, {handl
             if (response.status === 200 && response.data.rol.idRol === 2) {
                 iniciarSesion(response.data, {handleUsuario});
             }
+            toast.error("El correo o la contraseña son incorrectos");
             handleLoading(false);
         }).catch(error => {
-            toast.error("El correo o la contraseña son incorrectos");
+            toast.error("Ocurrió un error al iniciar sesión");
             handleLoading(false);
             console.error(error);
         });
@@ -22,14 +23,14 @@ export const getUsuarioPorCorreoContrasenna = async (correo, contrasenna, {handl
 
 export const iniciarSesion = (usuario, {handleUsuario}) => {
     const cookie = new Cookies();
-    cookie.set('usuario', usuario, { path: '/' });
-    handleUsuario(cookie.get('usuario'));
+    cookie.set('usuarioAdmin', usuario, { path: '/' });
+    handleUsuario(cookie.get('usuarioAdmin'));
     toast.success("Bienvenido "+ usuario.nombre + " " + usuario.apellidos +"");
 }
 
 export const cerrarSesion = ({handleUsuario}) => {
     const cookie = new Cookies();
-    cookie.remove('usuario', { path: '/' });
+    cookie.remove('usuarioAdmin', { path: '/' });
     handleUsuario(null);
     toast.success("Sesión cerrada exitosamente");
 }

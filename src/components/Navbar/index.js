@@ -23,7 +23,7 @@ export const NavbarComponent = ({ usuario, handleUsuario }) => {
             <NavbarContainer>
                 <NavbarBrand>
                     {/* <img src={KeepLogo} alt="keep" /> */}
-                    <h2 className='text-2xl font-semibold text-white text-center mx-2'> Modulo Administrador</h2>
+                    <h2 className='text-2xl font-semibold text-white text-center mx-2'>Administrador</h2>
                 </NavbarBrand>
                 <NavbarList >
                 </NavbarList>

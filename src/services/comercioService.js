@@ -20,7 +20,7 @@ export const getComercios = async ({ handleComercios, handleTotalComercios, hand
         });
 }
 
-export const registrarComercio = async (comercio, { handleUpdate, handleNotification, handleSpinner }) => {
+export const registrarComercio = async (comercio, { handleUpdate, handleNotification, handleSpinner, setmodalRegistrar }) => {
 
     const data = {
         nombre: comercio.nombre.trim(),
@@ -43,6 +43,7 @@ export const registrarComercio = async (comercio, { handleUpdate, handleNotifica
             console.log(response.status);
             if (response.status === 200) {
                 handleUpdate();
+                setmodalRegistrar(false);
                 handleNotification("Registro exitoso", "El comercio se ha registrado exitosamente", "success");
                 handleSpinner(false);
                 return;

@@ -12,7 +12,7 @@ import Cookies from 'universal-cookie';
 function App() {
 
   const cookies = new Cookies();
-  const [usuario, setUsuario] = useState(cookies.get('usuario'));
+  const [usuario, setUsuario] = useState(cookies.get('usuarioAdmin'));
 
 
   const handleUsuario = (usuario) => {

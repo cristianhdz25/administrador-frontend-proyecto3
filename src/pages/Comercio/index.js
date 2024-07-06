@@ -113,7 +113,7 @@ export const Comercio = () => {
     comercioSeleccionado.fechaFundacion = new Date(date).toISOString();
 
     handleSpinner(true);
-    registrarComercio(comercioSeleccionado, { handleUpdate, handleNotification, handleSpinner });
+    registrarComercio(comercioSeleccionado, { handleUpdate, handleNotification, handleSpinner, setmodalRegistrar });
   }
 
   const sendFormActualizarEstado = (comercio) => {
@@ -411,6 +411,11 @@ export const Comercio = () => {
           <fieldset className="space-y-1 flex text-center flex-col ">
             <Label htmlFor="telefono" className="text-body-2"><p className="text-white">Teléfono</p></Label>
             <Label className="ps-1">{comercioSeleccionado.telefono}</Label>
+          </fieldset>
+
+          <fieldset className="space-y-1 flex text-center flex-col ">
+            <Label htmlFor="telefono" className="text-body-2"><p className="text-white">Cuenta IBAN</p></Label>
+            <Label className="ps-1">{comercioSeleccionado.cuentaIBAN}</Label>
           </fieldset>
 
           <fieldset className="space-y-1 flex text-center flex-col ">
